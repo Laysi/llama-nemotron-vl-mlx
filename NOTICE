@@ -1,0 +1,15 @@
+llama-nemotron-vl-mlx
+Copyright 2026 Laysi Co., Ltd
+
+This product is an MLX implementation of NVIDIA's llama-nemotron-rerank-vl-1b-v2
+and llama-nemotron-embed-vl-1b-v2. It follows NVIDIA's model and processing
+code for those models (Apache License 2.0).
+
+The model weights it loads are not part of this repository and are governed
+by their own licenses:
+
+- Licensed by NVIDIA Corporation under the NVIDIA Open Model License.
+- Llama 3.2 is licensed under the Llama 3.2 Community License, Copyright (c)
+  Meta Platforms, Inc. All Rights Reserved.
+
+Built with Llama.

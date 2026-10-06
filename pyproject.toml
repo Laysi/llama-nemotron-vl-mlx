@@ -1,0 +1,50 @@
+[project]
+name = "llama-nemotron-vl-mlx"
+version = "0.1.0"
+description = "MLX port of NVIDIA llama-nemotron-rerank-vl-1b-v2 and llama-nemotron-embed-vl-1b-v2 for Apple Silicon"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.10"
+dependencies = [
+    "mlx>=0.29; sys_platform == 'darwin'",
+    # The CPU backend lets the port be checked against PyTorch off a Mac.
+    "mlx[cpu]>=0.29; sys_platform == 'linux'",
+    "numpy>=2",
+    "pillow>=11",
+    "tokenizers>=0.22",
+]
+
+[project.urls]
+Repository = "https://github.com/Laysi/llama-nemotron-vl-mlx"
+
+[dependency-groups]
+# NVIDIA's PyTorch implementation, which tools/ checks the port against.
+reference = [
+    "requests>=2.32",
+    "sentence-transformers>=6.1.0",
+    "torch>=2.9",
+    "torchvision>=0.24",
+    "transformers>=4.56",
+]
+
+[build-system]
+requires = ["uv_build>=0.12,<0.13"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "nemotron_vl_mlx"
+
+[tool.uv]
+# The interpreter comes from proto (.prototools); uv must not fetch its own.
+python-preference = "only-system"
+python-downloads = "never"
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
+torchvision = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
